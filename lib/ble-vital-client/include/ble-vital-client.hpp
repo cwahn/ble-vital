@@ -65,10 +65,10 @@ private:
 constexpr const char *target_identifier = "Ars Vivendi BLE";
 struct BleFrame
 {
-    float spo2;
-    float heart_rate;
-    float temperature;
-    float fft[125];
+    int spo2;
+    int heart_rate;
+    int temperature;
+    int fft[125];
 };
 
 // May costumize if more control on connection policy or callback parameter.

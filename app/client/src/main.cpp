@@ -26,9 +26,9 @@ int main(int, char **)
                             fft_view);
 
         printf("spo2: %f, heart_rate: %f, temperature: %f, read_duration: %f\n",
-               p_ble_frame->spo2,
-               p_ble_frame->heart_rate,
-               p_ble_frame->temperature,
+               p_ble_frame->spo2 / 1000000.,
+               p_ble_frame->heart_rate / 1000000.,
+               p_ble_frame->temperature / 1000000.,
                read_duration_ms);
         // ble_frame.spo2 = p_ble_frame->spo2;
         // ble_frame.heart_rate = p_ble_frame->heart_rate;
