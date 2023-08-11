@@ -35,7 +35,9 @@ The Max30102 SPO2 sensor will do sampling at 200 Hz and decimated by 32 to resul
 The sample will be read every 160 ms. LED data will be pushed to a sliding window of size 256. Data in the window will preprocessed by removing DC and detrending in sequence. Detrended data is used to evaluate, correlation, heart rate, and SPO2.
 
 $$ Correlation = Pearson Correlation (Red, IR) $$
+
 $$ heart rate = argmax(FFT (IR)) * 6.25 Hz / (256 * 2) * 60 \ BPS $$
+
 $$ SPO2 = 104 * \frac{Red_{AC}/ Red_{Dc}}{Ir_{AC}/ Ir_{Dc}} - 17 $$
 
 The heart rate and SPO2 result will be disregarded in case the correlation value is smaller than 0.7 assuming there is no target on the sensor and the data will be zero. The latest data from max30102 will be included in BLE frame. Therefore, any subsequent reads with in 160 ms may get the same result. 
