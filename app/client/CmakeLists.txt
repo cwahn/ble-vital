@@ -1,0 +1,9 @@
+add_executable(client
+    "src/main.cpp"
+)
+target_link_libraries(client
+    PRIVATE
+    efp
+    simpleble::simpleble
+    ble_vital_client
+)
