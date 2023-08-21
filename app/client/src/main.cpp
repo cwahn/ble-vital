@@ -22,13 +22,14 @@ int main(int, char **)
     {
         ArrayView<float, 125> fft_view{(float *)&(p_ble_frame->fft)};
         for_each_with_index([](int i, auto x)
-                            { ble_frame.fft[i] = (x >= 0 ? x : -x) / 128.; },
+                            { float normalized = (float)x / (float)(128 * 1000);
+                            ble_frame.fft[i] = normalized >= 0? normalized: -normalized ; },
                             fft_view);
 
         printf("spo2: %f, heart_rate: %f, temperature: %f, read_duration: %f\n",
-               p_ble_frame->spo2 / 1000000.,
-               p_ble_frame->heart_rate / 1000000.,
-               p_ble_frame->temperature / 1000000.,
+               p_ble_frame->spo2 / 1000.,
+               p_ble_frame->heart_rate / 1000.,
+               p_ble_frame->temperature / 1000.,
                read_duration_ms);
         // ble_frame.spo2 = p_ble_frame->spo2;
         // ble_frame.heart_rate = p_ble_frame->heart_rate;

@@ -12,10 +12,10 @@ Each BLE read will contain following information.
 ```cpp
 struct BleFrame
 {
-    float spo2;
-    float heart_rate;
-    float temperature;
-    float fft[125];
+    int spo2; // Should deviced by 1000 to get fixed point float.
+    int heart_rate; // Should deviced by 1000 to get fixed point float.
+    int temperature; // Should deviced by 1000 to get fixed point float.
+    int fft[125]; // Should deviced by 1000 to get fixed point float.
 };
 ```
 
