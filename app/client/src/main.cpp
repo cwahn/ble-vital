@@ -20,11 +20,11 @@ int main(int, char **)
 {
     const auto callback = [](const BleFrame *p_ble_frame, const float &read_duration_ms)
     {
-        ArrayView<float, 125> fft_view{(float *)&(p_ble_frame->fft)};
-        for_each_with_index([](int i, auto x)
-                            { float normalized = (float)x / (float)(128 * 1000);
-                            ble_frame.fft[i] = normalized >= 0? normalized: -normalized ; },
-                            fft_view);
+        // ArrayView<float, 125> fft_view{(float *)&(p_ble_frame->fft)};
+        // for_each_with_index([](int i, auto x)
+        //                     { float normalized = (float)x / (float)(128 * 1000);
+        //                     ble_frame.fft[i] = normalized >= 0? normalized: -normalized ; },
+        //                     fft_view);
 
         printf("spo2: %f, heart_rate: %f, temperature: %f, read_duration: %f\n",
                p_ble_frame->spo2 / 1000.,

@@ -68,7 +68,8 @@ struct BleFrame
     int spo2;
     int heart_rate;
     int temperature;
-    int fft[125];
+    int fft_1[24];
+    int fft_2[100];
 };
 
 // May costumize if more control on connection policy or callback parameter.

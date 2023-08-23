@@ -15,7 +15,8 @@ struct BleFrame
     int spo2; // Should deviced by 1000 to get fixed point float.
     int heart_rate; // Should deviced by 1000 to get fixed point float.
     int temperature; // Should deviced by 1000 to get fixed point float.
-    int fft[125]; // Should deviced by 1000 to get fixed point float.
+    int fft_1[24]; // Re(X_i), Im(X_i) ... , 6 <= i < 18  
+    int fft_2[100];  // Re(X_i), Im(X_i) ... , 76 <= i < 126  
 };
 ```
 
@@ -27,7 +28,7 @@ The raw ADC data will be decimated to 1024 Hz. (i.e. Filtered with first order l
 
 Queued data will be poped in every 62500 us, which means expecting about 64 new samples. If more than 64 samples are queued, data will get poped, otherwise, wait for next period.
 
-Poped 64 samples will be pushed to a sliding window of size 128. The data in the sliding window is preprocessed by removing DC and detrending (1st order) in sequence. The preprocessed data went through real FFT to result in 128 frequency domain signal. The first 125 signals will be queued in the next BLE data. 
+Poped 64 samples will be pushed to a sliding window of size 512. The data in the sliding window is preprocessed by removing DC and detrending (1st order) in sequence. The preprocessed data went through real FFT to result in 256 frequency domain signal. The data of 20 ~ 70 Hz, 300 ~ 500 Hz signals will be queued in the next `BLE data` `fft_1` and `fft_2` accordingly. 
 
 ### SPO2
 The Max30102 SPO2 sensor will do sampling at 200 Hz and decimated by 32 to result in 6.25 Hz. Each sample will contain red LEDs, IR LEDs, temperature. 
